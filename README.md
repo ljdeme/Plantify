@@ -1,7 +1,7 @@
 # Plantify
 A social platform and plant care app.
 
-# Git-Hub Set up
+## Git-Hub Set up
 1. Create a token
   - a. go to profile icon (top right of the screen) and look at the drop down menu
   - b. go to settings
@@ -20,7 +20,7 @@ A social platform and plant care app.
   - c. Initialize git in the file directory: 'git init'
   - d. Enter 'git pull https://github.com/ljdeme/Team-10_Contact_Manager.git' into the commandline 
   
-# Git Crash-Course
+## Git Crash-Course
 1. To pull from repository
   - 'git pull https://github.com/ljdeme/Team-10_Contact_Manager.git'
   
