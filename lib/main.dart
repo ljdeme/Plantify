@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'register.dart';
-import 'login.dart';
+import 'authenticate/register.dart';
+import 'authenticate/login.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -62,8 +62,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its

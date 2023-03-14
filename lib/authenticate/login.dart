@@ -1,22 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:plantify/main.dart';
+import 'package:plantify/widgets/widgets.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
 
   @override
-  _Login createState() => _Login();
+  State<Login> createState() => _LoginState();
 }
 
-class _Login extends State<Login> {
+class _LoginState extends State<Login> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+
+  // Handle login
+  Future<void> login(String email, String password) async {
+    bool isSignedIn;
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+      isSignedIn = true;
+    } on FirebaseAuthException catch (error) {
+      isSignedIn = false;
+    }
+    isLoggedIn(isSignedIn);
+  }
+
+  // Check if login successful
+  Future<void> isLoggedIn(bool successfulLogin) async {
+    if (successfulLogin == true) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const MyHomePage(title: 'hi')));
+    } else {
+      print('Incorrect Email or Password');
+    }
+  }
+
+  // check if user is verified
+  //Future<void> isVerified() {};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Login Page')),
+        appBar: AppBar(title: const Text('Login')),
         body: SingleChildScrollView(
             child: Column(children: <Widget>[
           Padding(
@@ -42,24 +72,14 @@ class _Login extends State<Login> {
                     hintText: 'password'),
                 keyboardType: TextInputType.visiblePassword,
               )),
-          Container(
+          SizedBox(
             height: 50,
             width: 250,
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(20)),
-            child: TextButton(
+            child: GreenButton(
               onPressed: () {
-                FirebaseAuth.instance.createUserWithEmailAndPassword(
-                    email: _emailController.text,
-                    password: _passwordController.text);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MyHomePage(title: 'hi')));
+                login(_emailController.text, _passwordController.text);
               },
-              child: const Text(
-                'Login',
-              ),
+              text: 'Login',
             ),
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
