@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:plantify/main.dart';
-import 'package:plantify/widgets/widgets.dart';
+import 'package:plantify/home_page.dart';
+import '../widgets/widgets.dart';
+import 'package:plantify/authenticate/register.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _LoginState extends State<Login> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  late bool _validateEmail = false, _validatePassword = false;
 
   // Handle login
   Future<void> login(String email, String password) async {
@@ -32,9 +34,7 @@ class _LoginState extends State<Login> {
   Future<void> isLoggedIn(bool successfulLogin) async {
     if (successfulLogin == true) {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const MyHomePage(title: 'hi')));
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     } else {
       print('Incorrect Email or Password');
     }
@@ -86,7 +86,10 @@ class _LoginState extends State<Login> {
             const Text("Don't have an account? "),
             GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/register');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Register()));
                 },
                 child: const Text("Sign Up",
                     style: TextStyle(fontWeight: FontWeight.bold)))

@@ -20,17 +20,3 @@ class GreenButton extends StatelessWidget {
     );
   }
 }
-
-class ResponsiveTextField extends StatefulWidget {
-  const ResponsiveTextField({super.key});
-
-  @override
-  State<ResponsiveTextField> createState() => _ResponsiveTextField();
-}
-
-class _ResponsiveTextField extends State<ResponsiveTextField> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
